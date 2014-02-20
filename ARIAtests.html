@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ARIA tests</title>
+</head>
+
+<body>
+<h1>Testing basic ARIA support for images</h1>
+
+<h2>Basic image with aria-labelledby</h2>
+<p>The image below uses aria-labelledby and should indicate that  "Van Gogh's oilpainting of sunflowers" is the value.</p>
+<img src="sunflower.png" aria-labelledby="flower_id">
+<p><span id="flower_id">Van Gogh's oil painting of sunflowers</span>
+hangs in Amsterdam's Van Gogh museum.</p>
+    
+<h2>Providing a short description for a complex graphic</h2>
+<div role="img" aria-labelledby="star_id">
+<img src="sunflower.png" alt=""/>
+<img src="sunflower.png" alt=""/>
+<img src="sunflower.png" alt=""/>
+<img src="sunflower.png" alt=""/>
+<img src="sunflower2.png" alt=""/>
+</div>
+<div id="star_id">4 of 5</div> 
+
+<h2>Basic image with aria-label</h2>
+<img src="sunflower.png" aria-label="Sunflowers">
+<p>The image below uses aria-label="Sunflowers".</p>
+
+<h2>Image with aria-labelledby derived from multiple sources.  The value should be expressed as "The school of athens by Raphael".</h2>
+<h3 id=”t1”>The School of Athens</h3>
+<p><img src=”sunflower.png” aria-labelledby=”t1 a1”>This famous painting <span id=”a1”>by Raphael</span> is the artist’s most famous work.</p>
+ 
+    
+</body>
+</html>
