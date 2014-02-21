@@ -8,31 +8,33 @@
 <body>
 <h1>Testing basic ARIA support for images</h1>
 
+<p>In the following tests the image filename is "banana.png" so if you hear "banana" as the alternative text this means that the assistive technology is using the filename because it isn't finding any other text to use.  You should regard this as not passing the specific test.</p>    
+    
 <h2>Test 1: Basic image with aria-labelledby</h2>
 <p>The image below uses aria-labelledby and should indicate that  "Van Gogh's oilpainting of sunflowers" is the value.</p>
-<img src="sunflower.png" aria-labelledby="flower_id">
+<img src="banana.png" aria-labelledby="flower_id">
 <p><span id="flower_id">Van Gogh's oil painting of sunflowers</span>
 hangs in Amsterdam's Van Gogh museum.</p>
     
 <h2>Test 2: Providing a short description for a complex graphic</h2>
 <p>The value should be "4 of 5".</p>
 <div role="img" aria-labelledby="star_id">
-<img height="20px" width="20 px" src="sunflower.png" alt=""/>
-<img height="20px" width="20 px" src="sunflower.png" alt=""/>
-<img height="20px" width="20 px" src="sunflower.png" alt=""/>
-<img height="20px" width="20 px" src="sunflower.png" alt=""/>
-<img height="20px" width="20 px" src="sunflower2.png" alt=""/>
+<img height="20px" width="20 px" src="banana.png" alt=""/>
+<img height="20px" width="20 px" src="banana.png" alt=""/>
+<img height="20px" width="20 px" src="banana.png" alt=""/>
+<img height="20px" width="20 px" src="banana.png" alt=""/>
+<img height="20px" width="20 px" src="banana2.png" alt=""/>
 </div>
 <div id="star_id">4 of 5</div> 
 
 <h2>Test 3: Basic image with aria-label</h2>
 <p>The image below uses aria-label="Sunflowers".</p>
-<img src="sunflower.png" aria-label="Sunflowers">
+<img src="banana.png" aria-label="Sunflowers">
 
 <h2>Test 4: Image with aria-labelledby derived from multiple sources</h2>  
 <p>The value should be expressed as "The school of athens by Raphael".</p>
 <h3 id="t1">The School of Athens</h3>
-<p><img src="sunflower.png" aria-labelledby="t1 a1">This famous painting <span id="a1">by Raphael</span> is the artist’s most famous work.</p>
+<p><img src="banana.png" aria-labelledby="t1 a1">This famous painting <span id="a1">by Raphael</span> is the artist’s most famous work.</p>
  
     
 </body>
