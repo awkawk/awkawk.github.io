@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Screen reader testing of aria role=dialog - improved script</title>	
+<link title="teststyle" rel="stylesheet" href="../../../style/teststyle.css" type="text/css" />
+<style>
+.box-hidden {
+	display: none;
+	position: absolute;
+	top: 19em; left:15em; width:20em; height:5em;
+	border: 2px solid black;
+	padding:0 1em 1em 1em;
+	background-color: #eee;
+	z-index:1002;
+	overflow: auto;
+	}		
+</style>
+
+<script>
+var dialogOpen = false, lastFocus, dialog, okbutton, pagebackground;
+
+function showDialog(el) {
+	lastFocus = el || document.activeElement;
+	toggleDialog('show');
+}
+function hideDialog(el) {
+	toggleDialog('hide');
+}
+
+function toggleDialog(sh) {
+	dialog = document.getElementById("box");
+	okbutton = document.getElementById("ok");
+	pagebackground = document.getElementById("bg");
+
+	if (sh == "show") {
+		dialogOpen = true;
+
+		// show the dialog 
+		dialog.style.display = 'block';
+		
+		// after displaying the dialog, focus an element inside it
+		//okbutton.focus();
+		
+		// only hide the background *after* you've moved focus out of the content that will be "hidden"
+		pagebackground.setAttribute("aria-hidden","true");
+		
+	} else {
+		dialogOpen = false;
+		dialog.style.display = 'none';
+		pagebackground.setAttribute("aria-hidden","false");
+		lastFocus.focus(); 
+	}
+}
+
+
+document.addEventListener("focus", function(event) {
+
+    var d = document.getElementById("box");
+
+    if (dialogOpen && !d.contains(event.target)) {
+        event.stopPropagation();
+        d.focus();
+    }
+
+}, true);
+
+
+document.addEventListener("keydown", function(event) {
+    if (dialogOpen && event.keyCode == 27) {
+        toggleDialog('hide');
+    }
+}, true);
+
+</script>
+
+</head>
+
+<body>
+
+<div role="dialog" aria-labelledby="myDialog" id="box" class="box-hidden" tabindex="-1">
+	<h3 id="myDialog">Just an example.</h3>
+	<button id="ok" onclick="hideDialog(this);" class="close-button">OK</button>
+	<button onclick="hideDialog(this);" class="close-button">Cancel</button>		
+</div>
+
+<div id="bg">
+
+<p>Go to overview: <a href="../sr-aria.html">WAI-ARIA techniques with code examples</a></p>
+
+
+<h1 tabindex="0">Using Aria <code>role=dialog</code> (optimised for mobile browsers), now also tested with NVDA 2012.3.1</h1>
+
+<p>Detlev Fischer, (detlev  [dot] fischer [ at ] testkreis [dot] de)</p>
+<p>Twitter: <a href="http://twitter.com/wcagtest">@wcagtest</a></p>
+<p>Last update: 15 April 2013</p>
+
+<hr />
+<h2>The example</h2>
+
+<p><a onclick="showDialog(this); return false;" href="#" role="button">Display a dialog</a></p>
+
+
+<!-- ############################################## -->
+
+<hr />
+
+<h3>Notes on recent changes and updates</h3>
+<p><em>Note (9. April)</em>: Following feedback from <a href="http://twitter.com/mixolydian">@mixolydian</a> who asked why testing had originally used a slightly dated version of NVDA, I have re-tested with a more recent version (2012.3.1), only to find that the script re-focussing the triggering button does not work anymore in NVDA.</p>
+
+<p><em>Note (10. April)</em>: A discussion with <a href="http://twitter.com/jcsteh">@jcsteh</a> shows that the reason why focus management in NVDA currently does not work properly may be that the focus is re-set <em>before</em> the setting of <code>aria-hidden</code> to false takes effect (even though the line occurs <em>before</em> the focus is re-set). Interestingly, this problem did not occur in NVDA 2012.2 because that version did not support <code>aria-hidden</code> and thereby did not prevent the re-setting the focus into something NVDA thinks is still hidden. I have filed a bug @ NVDA.</p>
+
+<p>This serves to show that any optimisation of code and ARIA markup to ensure something works across as many platforms, browsers and screen readers as possible deals with a moving target. The <strong>fine-tuned behavior may fail to work its magic in the next minor update of a browser or screenreader</strong>.</p>
+
+<p><em>Earlier note:</em> Following feedback and active code input from <a href="http://twitter.com/cookiecrook">@cookiecrook</a> I have updated the <a href="role-dialog.html">original example of role=dialog</a> to improve accessibility (see <a href="#changes">section on changes</a> below).</p>
+
+
+<h3>Description and background of example</h3>
+
+<p>The example shows how to use the Aria role <code>dialog</code> when opening pseudo window (div boxes) dialogues via scripting. The <code>div</code> with <code>role=dialog</code> references the <code>h3</code> heading inside the dialog box via the <code>aria-labelledby</code> attribute, as recommended by <a href="http://twitter.com/gezlemon">@gezlemon</a> in his article <a href="http://juicystudio.com/article/custom-built_dialogs.php">Custom-Built Dialogs</a>. For simplicty, the dialogue <code>div</code> is originally just hidden, not dynamically inserted on the page via DOM scripting (I hope this doesn't make a difference in terms of focus handling, but it <em>may</em>).</p> 
+
+
+<p>The example is based the focus management scripts from <a href="http://www.nczonline.net/blog/2013/02/12/making-an-accessible-dialog-box/">Making an accessible dialog box</a> by Nicholas C. Zakas (note that this author recommends using <code>aria-describedby</code> to reference the heading inside the dialogue).</p>
+
+<h3 id="changes">Changes to improve accessibility and full keyboard access</h3>
+<ul>
+	<li>focusing the OK button (or any other focusable input field in the dialog) rather than focusing the dialog div itself. This ensures keyboard access will work with ARIA dialogs, as it does with native dialogs.</li>
+	<li>Masking the rest of the page with <code>aria-hidden</code> <strong>after</strong> moving the focus to the dialog <code>div</code>. This ensures the dialog will be treated as a modal dialog by screen readers as opposed to a non-modal dialog.<br /><em>Note</em>: The latter step may no longer be necessary once browsers fully implement support for <a href="http://dev.w3.org/html5/spec-preview/editing.html#inert-subtrees
+">inert subtrees in HTML5</a>.</li>
+
+</ul>
+
+<h3>Change to improve behavior in OS X</h3>
+<ul>
+<li>Adding <code>role="button"</code> to the triggering link to tackle a bug regarding moving focus from a link to a button</li>
+</ul>
+
+
+
+<div tabindex="0" class="results">
+<h2>Results</h2>
+<h3>Aria role <code>dialog</code> to announce a dialog (pop-up div box)</h3>
+<p>The sequence runs from focusing the trigger link to refocusing the same link after closing the dialogue. Tabbing action is indicated with TAB, enter with ENTER (Mac OS X: RETURN), arrowing down with DOWN ARROW, swiping with RIGHT SWIPE, double tapping with DOUBLE TAP.</p>
+
+<table>
+	<tr>
+		<th>Win 7, IE 9, JAWS 14</th>
+		<td class="supported">Supported</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Enter - Just an example - dialog - OK button</em> TAB <em class="speech-output">cancel button</em> ENTER <em class="speech-output">Display a dialog - button</em>
+<p><em>Note:</em> Tabbing cycles focus within dialog but only because dialog code is placed at at the very beginning of the page - if placed at the end, tabbing beyond the 'Cancel' button focuses the browser chrome, then leads back into the dialog.</p></li>
+				
+				 
+				<li>Arrowing through virtual buffer:<br />
+				DOWN ARROW <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Enter - Just an example - dialog - OK - button</em> DOWN ARROW <em class="speech-output">Cancel - button</em> ENTER <em class="speech-output">Enter - Display a dialog - button</em>
+<p>Note that arrowing down will not continue beyond 'Cancel' button (just repeat it).  Arrowing up beyond <code>h3</code> 'Just an example' stops at reading the page title.</p>
+</li> 
+			 </ul>
+
+		</td>
+	</tr>
+		
+	<tr>
+		<th>Win 7, FF 20, JAWS 14</th>
+		<td class="supported">Supported</td>
+		<td>	
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Enter - Just an example - dialog - OK - button</em> TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">Display a dialog - button</em> 
+<p><em>Note:</em> Same tabbing behaviour applies as noted above in results for Win 7, IE 9, JAWS 14.</p></li>
+</li>
+				
+				<li>Arrowing through virtual buffer:<br />
+				DOWN ARROW <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Enter - Just an example - dialog - OK - button</em> DOWN ARROW <em class="speech-output">blank</em> DOWN ARROW <em class="speech-output">Cancel button</em> ENTER <em class="speech-output">Display a dialog - button</em>
+<p>Note that arrowing down will not continue beyond "Cancel button" (just repeat it). Arrowing up will end at "Just an example".</p></li> 
+			 </ul>
+		</td>
+	</tr>
+
+	<tr>
+		<th>Win 7, IE9, NVDA&nbsp;2012.3.1</th>
+		<td class="supported">Supported (but no re-focusing of trigger)</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Just an example - dialog - OK - button</em> TAB <em class="speech-output">Cancel - button</em> ENTER <em class="speech-output">Screenreader testing of aria role dialog improved script - document - go to overview - visited link - WAI-ARIA techniques with code examples</em>
+<p>Note that with NVDA 2012.3.1, the <strong>focus management with <code>aria-hidden</code> does not seem to work as it did under NVDA 2012.2.1</strong> - after closing the dialog, the visual focus indication moves to the triggering button, but the <strong>SR focus moves to the start of the page and reads it.</strong></p></li>
+				
+				<li>Arrowing through dialog produces strange results:<br />
+				DOWN ARROW <em class="speech-output">button - Display a dialog</em> ENTER <em class="speech-output">link - Just an example - dialog - OK - button</em> DOWN ARROW <em class="speech-output">Just an example - OK - Cancel - Go to overvew - WAI-ARIA techniques with code examples - using Aria role dialog optimised for mobile</em>. Further   DOWN ARROW presses will repeat last long chunk of output.
+<p>(<em>Please correct me if I get things wrong using NVDA. Pressing NVDA key + space to switch back from focus mode to virtual buffer seems to have no effect, while ESC closes the dialog (as provisioned by the script.</em>)</p></li> 
+			 </ul>
+ 		</td>
+	</tr>	
+
+	<tr>
+		<th>Win 7, IE9, NVDA&nbsp;2012.2.1</th>
+		<td class="supported">Supported</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Just an example - dialog - OK - button</em> TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">aria role dialog document - button - display a dialog</em></li>
+				
+				<li>Arrowing through dialog produces strange results:<br />
+				DOWN ARROW <em class="speech-output">button - Display a dialog</em> ENTER <em class="speech-output">link - Just an example - dialog - OK - button</em> DOWN ARROW <em class="speech-output">go to overview</em> - (starts reading page from top..)  DOWN ARROW <em class="speech-output">blank - aria role dialog document - button display a dialog - Just an example - dialog - Just an example</em> (further arrowing up or down produces no results (application mode? effect of <code>aria-hidden</code>?)</li> 
+			 </ul>
+ 		</td>
+	</tr>	
+
+
+	<tr>
+		<th>Win 7, FF 20, NVDA&nbsp;2012.3.1</th>
+		<td class="supported">Supported (but no re-focussing of trigger)</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">Just an example - dialog - OK - button</em> TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">Screen reader testing of aria role=dialog - improved script - document - go to overview - visited link - WAI-ARIA techniques with code examples</em></li>
+
+<p>Note that with NVDA 2012.3.1, the <strong>focus management with <code>aria-hidden</code> does not seem to work as it did under NVDA 2012.2.1</strong> - after closing the dialog, the visual focus indication moves to the triggering button, but the <strong>SR focus moves to the start of the page and reads it.</strong></p></li>
+				
+				<li>Arrowing through virtual buffer: Reads role=dialogue, but re-setting the SR focus to triggering button does not work, as above.
+<br />
+				ARROW DOWN <em class="speech-output">button - Display a dialog</em> ENTER <em class="speech-output">Just an example - dialog - OK - button</em> Arrowing up and down produces no results. TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">Screen reader testing of aria role=dialog - improved script.. </em> (Please correct me if I got things wrong using NVDA)</li> 
+			 </ul>
+ 		</td>
+	</tr>
+
+	<tr>
+		<th>Win 7, FF 18, NVDA&nbsp;2012.2.1</th>
+		<td class="supported">Supported</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> ENTER <em class="speech-output">link - Just an example - dialog - OK - button</em> TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">aria role dialog document - button - display a dialog</em></li>
+				
+				<li>Arrowing through virtual buffer:<br />
+				ARROW DOWN <em class="speech-output">button - Display a dialog</em> ENTER <em class="speech-output">Just an example - dialog - OK - button</em> Arrowing up and down produces no results. TAB <em class="speech-output">cancel - button</em> ENTER <em class="speech-output">aria role dialog document - button - display a dialog</em>.</li> 
+			 </ul>
+ 		</td>
+	</tr>
+	
+	<tr>
+		<th>Mac OS 10.8.x, Safari, VoiceOver</th>
+		<td class="supported">Supported</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> RETURN <em class="speech-output">Just an example - with 2 items - dialog  - OK button</em> RETURN <em class="speech-output">Display a dialog - button</em></li>
+				
+				<li>Arrowing with VO + arrow right: Same behavior as with tabbing (only that link needs to be activated with VO + space bar).</li> 
+			 </ul>
+		</td>
+	</tr>
+
+	
+	<tr>
+		<th>Mac OS 10.8.x, Safari, VoiceOver<div class="footnote">(Test supplied by <a href="http://twitter.com/cookiecrook">@cookiecrook</a>)</div></th>
+		<td class="supported">Supported</td>
+		<td>
+			<ul>
+				<li>Tabbing:<br />
+				TAB <em class="speech-output">Display a dialog - button</em> RETURN <em class="speech-output">Just an example - with 2 items - dialog  - OK button</em> RETURN <em class="speech-output">Display a dialog - button</em></li>
+				
+				<li>Arrowing with VO + arrow right: Same behavior as with tabbing (only that link needs to be activated with VO + space bar).</li> 
+			 </ul>
+		</td>
+	</tr>
+
+	<tr>
+		<th>Mac OS 10.6.8, Safari, VoiceOver</th>
+		<td class="partial-support">Partial support</td>
+		<td>
+		<p>While VO does not speak role dialog, it does announce the dialog heading associated via <code>aria-labelledby</code>.</p>
+			<ul>
+				<li>Tabbing:<br />
+				<em class="speech-output">Display a dialog - button</em> RETURN <em class="speech-output">OK - Just an example - button</em> TAB <em class="speech-output">Cancel - Just an example - button</em> RETURN <em class="speech-output">Display a dialog - button</em></li>
+				
+				<li>Arrowing with VO + arrow right: Same behavior as with tabbing (only that link needs to be activated with VO + space bar).</li> 
+			 </ul>
+		</td>
+	</tr>
+
+	<tr>
+		<th>iOS 6.1.3, Safari, VoiceOver (iPad mini)</th>
+		<td class="partial-support">Partial support</td>
+ 		<td>
+			<p>While VO does not speak role dialog, it does announce the dialog heading associated via <code>aria-labelledby</code>. Focus handling works only when everything outside the dialogue is masked with <code>aria-hidden</code>.</p>
+			<p>Swiping:<br />
+			RIGHT SWIPE <em class="speech-output">Display a dialog - button</em> DOUBLE TAP <em class="speech-output">Display a dialog - Just an example - heading level 3</em> RIGHT SWIPE <em class="speech-output">OK - button</em> RIGHT SWIPE <em class="speech-output">Cancel - button</em>  DOUBLE TAP  <em class="speech-output">Display a dialog - button</em>.</p>
+		
+			<p>Note that the focus trapping behaviour (i.e., VO focus can't be moved beyond the cancel button) depends on the <strong>entire rest of the page (i.e. everything but the dialog <code>div</code>) hidden with <code>aria-hidden</code></strong>. Otherwise the VO focus will move to the next bit in source code order that you failed to hide (circling to page start at page end), <strong>not</strong> to the dialog. While the script should move the focus to the OK button, it actually moves it to the first element of the dialog, the heading.</td>
+	</tr>
+	
+
+	<tr>
+		<th>Android 4.2, Firefox, Talkback (Nexus 7)</th>
+		<td class="partial-support">Partial support</td>
+		<td>
+			<p>Swiping:<br />
+			RIGHT SWIPE <em class="speech-output">display a dialog - button</em> DOUBLE TAP <em class="speech-output">button OK</em> RIGHT SWIPE <em class="speech-output">button - cancel</em> DOUBLE TAP <em class="speech-output"> aria role equals dialog - button - display a dialog</em>.</p>
+			<p>Note that the <strong>role dialog is announced only after closing the dialog</strong>, so this is not so useful. Setting the focus to the dialog <code>div</code> or the <code>h3</code> heading instead of the OK button might be advantageous here.</p>
+		</td>
+	</tr>
+
+</table>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
