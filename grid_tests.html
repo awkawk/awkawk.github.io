@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <h2>Grid 3</h2>
+    <h2>Grid 3 - grid with aria-label</h2>
     
     <div role="grid" aria-label="foo" aria-readonly="true">
         <div role="row">
@@ -64,7 +64,45 @@
             <span role="gridcell">90</span>
         </div>
     </div>
-<p>Need an example with complex table relationships</p>
+
+    <h2>Grid 4 - grid with labelledby</h2>
+    <h3 id="tc">This is to be the table caption</h3>
+    
+    <div role="grid" aria-labelledBy="tc" aria-readonly="true">
+        <div role="row">
+            <span role="rowheader">Month</span>
+            <span role="gridcell">Jan</span>
+            <span role="gridcell">Feb</span>
+            <span role="gridcell">Mar</span>
+        </div>
+        <div role="row">
+            <span role="rowheader">Expenses</span>
+            <span role="gridcell">100</span>
+            <span role="gridcell">130</span>
+            <span role="gridcell">90</span>
+        </div>
+    </div>
+
+    <h2>Grid 5</h2>
+    
+    <div role="grid" aria-readonly="true">
+        <div role="row">
+            <span role="gridcell"></span>
+            <span role="gridcell" id="aa">John</span>
+            <span role="gridcell" id="bb">Ivan</span>
+        </div>
+        <div role="row">
+            <span role="gridcell" id="cc">Apples</span>
+            <span role="gridcell" id="dd" aria-labelledby="aa cc">10</span>
+            <span role="gridcell" id="ee" aria-labelledby="bb cc">12</span>
+        </div>
+        <div role="row">
+            <span role="gridcell" id="ff">Oranges</span>
+            <span role="gridcell" id="gg" aria-labelledby="aa ff">1</span>
+            <span role="gridcell" id="hh" aria-labelledby="bb ff">9</span>
+        </div>
+    </div>
+
     
 </body>
 </html>
