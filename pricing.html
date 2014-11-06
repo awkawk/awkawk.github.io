@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Pricing tests</title>
+    <style type="text/css">
+body{background:white; color:black;}
+span {margin: 0px;
+padding: 0px;
+border: 0px none;
+outline: 0px none;
+font-weight: inherit;
+font-style: inherit;
+font-size: 100%;
+font-family: inherit;}
+.price {color: #3C0;}
+.Dollars {position: relative;
+display: inline;
+font-size: 21px;
+font-weight: bold;
+line-height: 27px;
+vertical-align: top;
+margin-right: 1px;}
+
+.Decimal_dn {display:none;}
+.Decimal_vh {visibility:hidden;}
+.Decimal_clip {  
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  /* Workaround for the focus rectangle in Webkit */
+  overflow: hidden;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 -1px -1px 0 !important;
+}
+
+        
+    </style>
+</head>
+
+<body>
+    <h1>Pricing tests</h1>
+    
+    <h2>Full price, with decimal</h2>
+<div class="price"><span class="CurrencySymbol">US$</span><span class="Dollars">4</span><span class="Cents"><span>.</span>25</span></div>
+    
+    <h2>Full price, with decimal hidden with display:none</h2>
+<div class="price"><span class="CurrencySymbol">US$</span><span class="Dollars">5</span><span class="Cents"><span class="Decimal_dn">.</span>99</span></div>
+
+    <h2>Full price, with decimal hidden with visibility:hidden</h2>
+<div class="price"><span class="CurrencySymbol">US$</span><span class="Dollars">6</span><span class="Cents"><span class="Decimal_vh">.</span>50</span></div>
+
+    <h2>Full price, with decimal hidden with clipping</h2>
+<div class="price"><span class="CurrencySymbol">US$</span><span class="Dollars">7</span><span class="Cents"><span class="Decimal_clip">.</span>99</span></div>
+
+    <h2>Full price, with no decimal</h2>
+<div class="price"><span class="CurrencySymbol">US$</span><span class="Dollars">8</span><span class="Cents">25</span></div>
+    
+    <h2>Full price, with no decimal and no styles</h2>
+<div><span>US$</span><span>9</span><span>25</span></div>
+
+    
+</body>
+</html>
