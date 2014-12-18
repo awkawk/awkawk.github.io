@@ -10,7 +10,18 @@
 window.onload = ready;
     
 function ready() {
-    document.getElementById("article1").addEventListener("click", function() {
+
+for (i = 0; i < 4; i++) { 
+    var whichArticle = "article" + (i+1);
+    alert(whichArticle);
+    document.getElementById(whichArticle).addEventListener("click", function() {
+    var x = document.getElementById(whichArticle).getAttribute("aria-label");
+    document.getElementById(whichArticle).style.display = "none";
+    status(x);
+});
+}
+    
+document.getElementById("article1").addEventListener("click", function() {
     var x = document.getElementById("article1").getAttribute("aria-label");
     var y = document.getElementById("article1").getAttribute("id");
     clearArticle(x,y);
@@ -33,9 +44,8 @@ document.getElementById("article4").addEventListener("click", function() {
 });
 }
 
-function clearArticle(a,b) {
+function status(a) {
     document.getElementById("update").innerHTML = a;
-    document.getElementById(b).style.display = "none";
 }
 
 </script>
