@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Using role=alert to Identify Errors</title>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+
+document.getElementById("article1").addEventListener("click", function() {
+    var x = document.getElementById("article1").getAttribute("aria-label");
+    var y = document.getElementById("article1").getAttribute("id");
+    clearArticle(x,y)
+});
+    
+document.getElementById("article2").addEventListener("click", function() {
+    var x = document.getElementById("article2").getAttribute("aria-label");
+    var y = document.getElementById("article2").getAttribute("id");
+    clearArticle(x,y)
+});
+document.getElementById("article3").addEventListener("click", function() {
+    var x = document.getElementById("article3").getAttribute("aria-label");
+    var y = document.getElementById("article3").getAttribute("id");
+    clearArticle(x,y)
+});
+document.getElementById("article4").addEventListener("click", function() {
+    var x = document.getElementById("article4").getAttribute("aria-label");
+    var y = document.getElementById("article4").getAttribute("id");
+    clearArticle(x,y)
+});
+
+function clearArticle(x,y) {
+    document.getElementById("update").innerHTML = y;
+    x.parentNode.removeChild(x)
+    return false;
+}
+    
+</script>
+</head>
+
+<body>
+<h1>Notification of button removal</h1>
+  <p id="update" style="width:0; height:0;" aria-atomic-"true" aria-live="assertive"></p>
+  
+<button id="article1" aria-label="Exclude article 1">Exclude</button>
+<button id="article2" aria-label="Exclude article 2">Exclude</button>
+<button id="article3" aria-label="Exclude article 3">Exclude</button>
+<button id="article4" aria-label="Exclude article 4">Exclude</button>
+
+    </body>
+</html>
