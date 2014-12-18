@@ -36,7 +36,7 @@ document.getElementById("article4").addEventListener("click", function() {
 function clearArticle(a,b) {
     document.getElementById("update").innerHTML = a;
     var child = document.getElementById(b);
-    child.parent.removeChild(child);    
+    child.parent.removeChild(b);    
 }
 
 </script>
@@ -44,7 +44,7 @@ function clearArticle(a,b) {
 
 <body>
 <h1>Notification of button removal</h1>
-  <p id="update" style="width:0; height:0;" aria-atomic-"true" aria-live="assertive"></p>
+  <p id="update" style="width:0; height:0; overflow:hidden;" aria-atomic-"true" aria-live="assertive"></p>
   
 <button id="article1" aria-label="Exclude article 1">Exclude</button>
 <button id="article2" aria-label="Exclude article 2">Exclude</button>
