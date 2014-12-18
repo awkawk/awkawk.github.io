@@ -35,7 +35,9 @@ document.getElementById("article4").addEventListener("click", function() {
 
 function clearArticle(a,b) {
     document.getElementById("update").innerHTML = a;
+    alert(b);
     var child = document.getElementById(b);
+    alert(child);
     child.parent.removeChild(b);    
 }
 
