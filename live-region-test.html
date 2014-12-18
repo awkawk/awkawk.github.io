@@ -4,26 +4,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Using role=alert to Identify Errors</title>
-<!-- <script src="http://code.jquery.com/jquery.js"></script> -->
 <script>
 
 window.onload = ready;
     
 function ready() {
-
-for (i = 0; i < 4; i++) { 
-    var whichArticle = "article" + (i+1);
-    alert(whichArticle);
-    document.getElementById(whichArticle).addEventListener("click", function() {
-    var x = document.getElementById(whichArticle).getAttribute("aria-label");
-    document.getElementById(whichArticle).style.display = "none";
+    
+document.getElementById("article1").addEventListener("click", function() {
+    var x = document.getElementById("article1").getAttribute("id");
+    var y = document.getElementById("article1").style.display = "none";
+    status(x);
+});
+    
+document.getElementById("article2").addEventListener("click", function() {
+    var x = document.getElementById("article2").getAttribute("id");
+    var y = document.getElementById("article2").style.display = "none";
+    status(x);
+});
+document.getElementById("article3").addEventListener("click", function() {
+    var x = document.getElementById("article3").getAttribute("id");
+    var y = document.getElementById("article3").style.display = "none";
+    status(x);
+});
+document.getElementById("article4").addEventListener("click", function() {
+    var x = document.getElementById("article4").getAttribute("id");
+    var y = document.getElementById("article4").style.display = "none";
     status(x);
 });
 }
-}
 
 function status(a) {
-    document.getElementById("update").innerHTML = a;
+    var str = a;
+    var msg = str.slice(7);
+    document.getElementById("update").innerHTML = "Article" + msg + "removed";
 }
 
 </script>
