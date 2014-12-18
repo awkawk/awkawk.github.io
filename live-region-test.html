@@ -7,10 +7,12 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script>
 
-document.getElementById("article0").addEventListener("click", function() {
+window.onload = ready;
+    
+function ready() {
+    document.getElementById("article0").addEventListener("click", function() {
     alert("yo");
 });
-
     
     document.getElementById("article1").addEventListener("click", function() {
     alert("yay");
@@ -34,6 +36,7 @@ document.getElementById("article4").addEventListener("click", function() {
     var y = document.getElementById("article4").getAttribute("id");
     clearArticle(x,y)
 });
+}
 
 function clearArticle(a,b) {
     document.getElementById("update").innerHTML = b;
