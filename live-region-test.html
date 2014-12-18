@@ -34,16 +34,10 @@ document.getElementById("article4").addEventListener("click", function() {
 }
 
 function clearArticle(a,b) {
-    document.getElementById("update").innerHTML = b;
-    removeBtn(a);
-    return false;
+    document.getElementById("update").innerHTML = a;
+    b.parent.removeChild(b);    
 }
 
-function removeBtn(b){
-  var parent = b.parentElement;
-  parent.parentElement.removeChild(parent);
-}
-    
 </script>
 </head>
 
