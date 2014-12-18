@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Using role=alert to Identify Errors</title>
-<script src="http://code.jquery.com/jquery.js"></script>
+<!-- <script src="http://code.jquery.com/jquery.js"></script> -->
 <script>
 
 window.onload = ready;
@@ -20,28 +20,6 @@ for (i = 0; i < 4; i++) {
     status(x);
 });
 }
-    
-document.getElementById("article1").addEventListener("click", function() {
-    var x = document.getElementById("article1").getAttribute("aria-label");
-    var y = document.getElementById("article1").getAttribute("id");
-    clearArticle(x,y);
-});
-    
-document.getElementById("article2").addEventListener("click", function() {
-    var x = document.getElementById("article2").getAttribute("aria-label");
-    var y = document.getElementById("article2").getAttribute("id");
-    clearArticle(x,y);
-});
-document.getElementById("article3").addEventListener("click", function() {
-    var x = document.getElementById("article3").getAttribute("aria-label");
-    var y = document.getElementById("article3").getAttribute("id");
-    clearArticle(x,y);
-});
-document.getElementById("article4").addEventListener("click", function() {
-    var x = document.getElementById("article4").getAttribute("aria-label");
-    var y = document.getElementById("article4").getAttribute("id");
-    clearArticle(x,y);
-});
 }
 
 function status(a) {
