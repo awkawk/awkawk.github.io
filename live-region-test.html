@@ -29,9 +29,9 @@ document.getElementById("article4").addEventListener("click", function() {
     clearArticle(x,y)
 });
 
-function clearArticle(x,y) {
-    document.getElementById("update").innerHTML = y;
-    x.parentNode.removeChild(x)
+function clearArticle(a,b) {
+    document.getElementById("update").innerHTML = b;
+    a.parentNode.removeChild(a)
     return false;
 }
     
