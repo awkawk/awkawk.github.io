@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>Timer Test</title>
+<script type="text/javascript">
+<!--
+function InactivityTimer(path, delay) {
+
+  // private instance var
+  var timeout;
+
+  // private functions
+  function logout() {
+    alert("you've been logged out");
+    window.location.href = path || "/";
+  }
+
+  function reset() {
+    stop();
+    start();
+  }
+
+  function start() {
+    if (!timeout) {
+      timeout = setTimeout(logout, delay || 5000);
+    }
+  }
+
+  function stop() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  }
+
+  // export public api
+  this.start = start;
+  this.stop  = stop;
+  this.reset = reset;
+
+  // init
+  document.addEventListener("mousemove", reset);
+  document.addEventListener("keypress",  reset);
+}
+
+function startTimer() {
+var timer = new InactivityTimer("/logout", 60000);    
+}
+
+-->
+</script>
+    
+</head>
+<body>
+
+<button onclick="startTimer()">Start timer</button>
+    
+</body>
+</html>
