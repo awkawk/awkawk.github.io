@@ -10,8 +10,13 @@ function InactivityTimer(path, delay) {
 
   // private functions
   function logout() {
+      if (confirm("This page is set to refresh in 20 seconds. 
+	Would you like more time?"))
+        {reset} 
+    else {
     alert("you've been logged out");
     window.location.href = path || "/";
+    }
   }
 
   function reset() {
@@ -43,7 +48,7 @@ function InactivityTimer(path, delay) {
 }
 
 function startTimer() {
-var timer = new InactivityTimer("/logout", 60000);    
+var timer = new InactivityTimer("/logout", 10000);    
 }
 
 -->
