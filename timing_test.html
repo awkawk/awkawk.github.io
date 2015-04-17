@@ -9,7 +9,7 @@ function timeControl() {
 }
 function userCheck() {
 	// set page refresh for 20 sec
-	var id=setTimeout(function{alert('hi')}, 5000);
+	var id=setTimeout(function{window.location.reload(true)}, 20000);
 	// If user selects "OK" the timer is reset 
 	// else the page will refresh from the server.
 	if (confirm("This page is set to refresh in 20 seconds. 
@@ -24,8 +24,18 @@ function userCheck() {
 </script>
     
 </head>
-<body onload="timeControl();">
+<body>
 <h1>Stock Market Quotes</h1>
 ...etc...
+
+<button onclick="timeControl();">Start timer</button>
+    
+<p>Click "Try it". Wait 3 seconds. The page will alert "Hello".</p>
+<p>Click "Stop" to prevent the first function to execute.</(p>
+<p>(You must click "Stop" before the 3 seconds are up.)</p>
+
+<button onclick="myVar = setTimeout(function(){alert('Hello')},3000)">Try it</button>
+ 
+<button onclick="clearTimeout(myVar)">Stop</button>
 </body>
 </html>
