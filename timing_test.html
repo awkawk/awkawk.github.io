@@ -9,7 +9,7 @@ function timeControl() {
 }
 function userCheck() {
 	// set page refresh for 20 sec
-	var id=setTimeout(function(){window.location.reload(true)}, 20000);
+	var id=setTimeout('logOut()', 20000);
 	// If user selects "OK" the timer is reset 
 	// else the page will refresh from the server.
 	if (confirm("This page is set to refresh in 20 seconds. 
@@ -18,6 +18,10 @@ function userCheck() {
 	clearTimeout(id);
 	timeControl();
 	}
+}
+
+function logOut() {
+	window.location.reload(true);
 }
 
 -->
