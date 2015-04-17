@@ -10,7 +10,7 @@ function InactivityTimer(path, delay) {
 
   // private functions
   function logout() {
-      if (confirm("This page is set to refresh in 20 seconds. Would you like more time?"))
+      if (confirm('This page is set to refresh in 20 seconds. Would you like more time?'))
         {reset} 
     else {
     alert("you've been logged out");
@@ -47,7 +47,7 @@ function InactivityTimer(path, delay) {
 }
 
 function startTimer() {
-var timer = new InactivityTimer("/logout", 10000);    
+var timer = new InactivityTimer("/logout", 5000);    
 }
 
 -->
@@ -57,6 +57,8 @@ var timer = new InactivityTimer("/logout", 10000);
 <body>
 <p>Timer test</p>
 <button onclick="startTimer()">Start timer</button>
+
+<embed src="simpleform.pdf" width="500" height="600">
     
 </body>
 </html>
