@@ -12,11 +12,12 @@
 <body>
 <form>
 <div class="event_reg_label" style="">
-              <label for="first-name"> <!-- the label for attribute value needs to match the targeted control -->
-              Login <span class=“mandatory” title="This field is required">*</span>     
-              </label> <!-- moved the end tag for label outside the span with the asterisk -->
-</div>
-<input type="text" name="first-name" id="first-name" class="event_reg_field" value="" onkeypress="return checkSubmit(event, regFormSubmit)" aria-required="true" required="true" style="border-color: red; border-width: 1px 1px 1px 2px;”>
+              <label for=“first_name” id=“fn_lbl"> <!-- the label for attribute value needs to match the targeted control, the id is so the aria-labelledby can reference it -->
+              Login 
+	      </label>
+	      <span class=“mandatory”>*</span>     
+              </div>
+<input type="text" name="first-name" id="first-name" class="event_reg_field" value="" onkeypress="return checkSubmit(event, regFormSubmit)" aria-required="true" required="true" style="border-color: red; border-width: 1px 1px 1px 2px;” aria-labelledby=“fn_lbl first-name_errorMessage">
 <span id="first-name_errorMessage" class="error_msg_registration">  This field is required </span>
     
 </form>
