@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Table THEAD and TFOOT Tests in HTML5</title>
+    <meta charset='utf-8'>
+  </head>
+  <body>
+  <h1>Table Tests in HTML5</h1>
+
+<h2>TFOOT follows TBODY</h2>
+
+  <table>
+ <thead>
+  <tr>
+     <th scope="col">Month</th>
+     <th scope="col">Savings</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+     <td>January</td>
+     <td>$100</td>
+  </tr>
+  <tr>
+     <td>February</td>
+     <td>$80</td>
+  </tr>
+ </tbody>
+ <tfoot>
+  <tr>
+     <td>Sum</td>
+     <td>$180</td>
+  </tr>
+ </tfoot>
+</table>
+      
+<h2>TFOOT before TBODY</h2>
+      
+<table>
+ <thead>
+  <tr>
+     <th scope="col">Month</th>
+     <th scope="col">Savings</th>
+  </tr>
+ </thead>
+ <tfoot>
+  <tr>
+     <td>Sum</td>
+     <td>$180</td>
+  </tr>
+ </tfoot>
+ <tbody>
+  <tr>
+     <td>January</td>
+     <td>$100</td>
+  </tr>
+  <tr>
+     <td>February</td>
+     <td>$80</td>
+  </tr>
+ </tbody>
+</table>
+  
+<h2>TFOOT follows TBODY and has an extra cell</h2>
+
+  <table>
+ <thead>
+  <tr>
+     <th scope="col">Month</th>
+     <th scope="col">Savings</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+     <td>January</td>
+     <td>$100</td>
+  </tr>
+  <tr>
+     <td>February</td>
+     <td>$80</td>
+  </tr>
+ </tbody>
+ <tfoot>
+  <tr>
+     <td>Sum</td>
+     <td>$180</td>
+  </tr>
+ </tfoot>
+</table>
+
+<h2>TFOOT follows TBODY and has a colspan</h2>
+
+  <table>
+ <thead>
+  <tr>
+     <th scope="col">Month</th>
+     <th scope="col">Savings</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+     <td>January</td>
+     <td>$100</td>
+  </tr>
+  <tr>
+     <td>February</td>
+     <td>$80</td>
+  </tr>
+ </tbody>
+ <tfoot>
+  <tr>
+     <td colspan="2">Sum</td>
+   </tr>
+ </tfoot>
+</table>
+      
+  </body>
+</html>
