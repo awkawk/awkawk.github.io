@@ -37,14 +37,14 @@
             .delete
             {
                 text-decoration:line-through;
-                :before: content:"[start remove]";
-                :after: content:"[start remove]";
+                ::before: content:"[del]";
+                ::after: content:"[/del]";
             }
             .change 
             {
                 background-color: orange;
-                :before: content:"[start change]";
-                :after: content:"[end change]";
+                ::before: content:"[add]";
+                ::after: content:"[/add]";
             }
             .todo
 			{
