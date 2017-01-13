@@ -37,8 +37,14 @@
             .delete
             {
                 text-decoration:line-through;
-                ::before: content:"[del]";
-                ::after: content:"[/del]";
+            }
+            .delete:before
+            {
+                content:"[del]";
+            }
+            .delete:after
+            {
+                content:"[/del]";
             }
             .change 
             {
@@ -46,11 +52,11 @@
             }
             .change:before
             {
-            content:"[add]";
+                content:"[add]";
             }
-            .change::after
+            .change:after
             {
-            content:"[/add]";
+                content:"[/add]";
             }
             .todo
 			{
