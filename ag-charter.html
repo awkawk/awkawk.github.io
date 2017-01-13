@@ -43,8 +43,14 @@
             .change 
             {
                 background-color: orange;
-                ::before: content:"[add]";
-                ::after: content:"[/add]";
+            }
+            .change:before
+            {
+            content:"[add]";
+            }
+            .change::after
+            {
+            content:"[/add]";
             }
             .todo
 			{
