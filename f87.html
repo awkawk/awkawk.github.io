@@ -1,0 +1,40 @@
+<!DOCTYPE html lang="en">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>F87 Tests</title>
+<style type="text/css">
+p.jim:before {	content: "Jim: " }
+p.mary:before { content: "Mary: " }
+
+q:before { content: open-quote }
+q:after  { content: close-quote }
+
+p.fact:before { content: "Fact: "; font-weight: bold; }
+p.opinion:before { content: "Opinion: "; font-weight: bold; }
+ 
+</style>
+</head>
+
+<body>
+<h1>F87 Examples</h1>
+
+<p>From <a href="https://www.w3.org/TR/WCAG20-TECHS/F87.html">Failure Technique F87.</p>
+
+<h2>Example 1</h2>
+<p class="jim">
+  <q>Do you think he's going to make it?</q>
+</p>
+
+<p class="mary">
+  <q>It's not looking good.</q>
+</p>
+
+<h2>Example 2</h2>
+
+<p class="fact">The defendant was at the scene of the crime when it occurred.</p>
+
+<p class="opinion">The defendant committed the crime.</p>
+
+</body>
+</html>
