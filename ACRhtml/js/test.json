@@ -1,30 +1,30 @@
 {
-  "ProductName": "Adobe Premiere Pro CC",
-  "ProductVersion": "2018",
-  "ProductDescription": "Adobe Premiere Pro CC is a video editor to create professional productions for film, TV and web.",
-  "ReportDate": "October 2017",
-  "StandardEvalMethod":	"yes/no",
-  "Nonstandard Evalution": "Desc",
-  "Notes": "The information contained in this report applies to the product itself. Information about product help and support documentation related to 602.3 (Support Docs) for Section 508 as published in 2017 is located at: http://www.adobe.com/accessibility/compliance.html.",
-  "Evaluationmethodsused": "Testing Adobe Premiere Pro CC involved extensive use of leading assistive technologies such as screen readers, screen magnifiers, and speech recognition software, as well exclusive use of the keyboard. Native platform accessibility features were also used to assist with testing. These were supplemented with techniques such as manual inspection of Accessibility API output.",
-  "WCAG level":	"A / AA / AAA",
-  "508_2017":	"Yes / No",
-  "EN301549":	"Yes / No",
-  "Criteria": [
-    {
-      "number": "1.1.1 Non-text Content (Level A)",
-      "Conformance": "Software: Does Not Support</p><p><strong>Authored Content (Video): </strong>Supports</p>",
-      "Remarks": "DNS"
-    },
-    {
-      "number": "1.1.1",
-      "Conformance": "",
-      "Remarks": "DNS"
-    },
-    {
-      "number": "1.1.1",
-      "Conformance": "",
-      "Remarks": "DNS"
-    }
-  ]
+ "ProductName": "Adobe Premiere Pro CC",
+ "ProductVersion": "2018",
+ "ProductDescription": "Adobe Premiere Pro CC is a video editor to create professional productions for film, TV and web.",
+ "ReportDate": "October 2017",
+ "StandardEvalMethod":    "no",
+ "Nonstandard Evalution": "Desc",
+ "Notes": "The information contained in this report applies to the product itself. Information about product help and support documentation related to 602.3 (Support Docs) for Section 508 as published in 2017 is located at: http://www.adobe.com/accessibility/compliance.html.",
+ "Evaluationmethodsused": "Testing Adobe Premiere Pro CC involved extensive use of leading assistive technologies such as screen readers, screen magnifiers, and speech recognition software, as well exclusive use of the keyboard. Native platform accessibility features were also used to assist with testing. These were supplemented with techniques such as manual inspection of Accessibility API output.",
+ "WCAG level":    "AA",
+ "508_2017":     "Yes",
+ "EN301549": "Yes",
+ "Criteria": [
+   {
+     "number": "1.1.1 Non-text Content (Level A)",
+     "Conformance": "<p><strong>Software:</strong> Does Not Support</p><p><strong>Authored Content (Video): </strong>Supports</p>",
+     "Remarks": "DNS"
+   },
+   {
+     "number": "1.1.1",
+     "Conformance": "",
+     "Remarks": "DNS"
+   },
+   {
+     "number": "1.1.1",
+     "Conformance": "",
+     "Remarks": "DNS"
+   }
+ ]
 }
